@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS university_library;
 CREATE DATABASE university_library;
 USE university_library;
 
@@ -38,7 +39,7 @@ CREATE TABLE Students (
     student_surname VARCHAR(50) NOT NULL,
     student_email VARCHAR(100) UNIQUE,
     student_phone_number VARCHAR(15),
-    registration_date DATE DEFAULT CURRENT_DATE
+    registration_date DATE
 );
 
 CREATE TABLE Loans (
