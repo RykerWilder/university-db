@@ -18,12 +18,9 @@ CREATE TABLE Authors (
 CREATE TABLE Books (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(100) NOT NULL,
-    isbn VARCHAR(13) UNIQUE NOT NULL,
     author VARCHAR(50),
     year_of_publication INT,
-    isbn_id INT UNIQUE,
     category_id INT,
-    FOREIGN KEY (isbn_id) REFERENCES ISBN(id),
     FOREIGN KEY (category_id) REFERENCES Categories(id)
 );
 
