@@ -20,7 +20,7 @@ CREATE TABLE Courses (
     id INT AUTO_INCREMENT PRIMARY KEY,
     course_name VARCHAR(255) NOT NULL,
     cfu INT NOT NULL
-)
+);
 
 CREATE TABLE Teachers (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -29,7 +29,7 @@ CREATE TABLE Teachers (
     teacher_surname VARCHAR(255) NOT NULL,
     specialization VARCHAR(255) NOT NULL
     FOREIGN KEY (course_id) REFERENCES Courses(id)
-)
+);
 
 CREATE TABLE Exam_appeals (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -48,7 +48,7 @@ CREATE TABLE Students (
     email VARCHAR(50) NOT NULL,
     birthday_date DATE NOT NULL,
     FOREIGN KEY (degree_course_id) REFERENCES Degree_courses(id)
-)
+);
 
 CREATE TABLE Students_record_book (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -57,4 +57,4 @@ CREATE TABLE Students_record_book (
     grade DECIMAL NOT NULL,
     FOREIGN KEY (student_id) REFERENCES Students(id),
     FOREIGN KEY (exams_appeals_id) REFERENCES Exam_appeals(id)
-)
+);
