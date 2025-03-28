@@ -22,6 +22,20 @@ CREATE TABLE Courses (
     cfu INT NOT NULL
 );
 
+CREATE TABLE Course_in_degree_course (
+    course_id INT NOT NULL,
+    degree_course_id INT NOT NULL,
+    FOREIGN KEY (course_id) REFERENCES Courses(id) ON DELETE CASCADE,
+    FOREIGN KEY (degree_course_id) REFERENCES Degree_courses(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Teachers_in_courses (
+    teacher_id NOT NULL,
+    course_id NOT NULL,
+    FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE,
+    FOREIGN KEY (course_id) REFERENCES Courses(id) ON DELETE CASCADE
+);
+
 CREATE TABLE Teachers (
     id INT AUTO_INCREMENT PRIMARY KEY,
     course_id INT NOT NULL,
@@ -35,7 +49,6 @@ CREATE TABLE Exam_appeals (
     id INT AUTO_INCREMENT PRIMARY KEY,
     course_id INT NOT NULL,
     exam_appeal_date DATE NOT NULL,
-    --session
     FOREIGN KEY (course_id) REFERENCES Courses(id)
 );
 
@@ -50,11 +63,18 @@ CREATE TABLE Students (
     FOREIGN KEY (degree_course_id) REFERENCES Degree_courses(id)
 );
 
+CREATE TABLE Students_in_exams_appeals (
+    student_id INT NOT NULL,
+    exam_appeals_id INT NOT NULL,
+    FOREIGN KEY (student_id) REFERENCES Students(id) ON DELETE CASCADE,
+    FOREIGN KEY (exam_appeals_id) REFERENCES Exam_appeals(id) ON DELETE CASCADE
+);
+
 CREATE TABLE Students_record_book (
     id INT AUTO_INCREMENT PRIMARY KEY,
     student_id INT NOT NULL,
-    exams_appeals_id INT NOT NULL,
+    exam_appeals_id INT NOT NULL,
     grade DECIMAL NOT NULL,
     FOREIGN KEY (student_id) REFERENCES Students(id),
-    FOREIGN KEY (exams_appeals_id) REFERENCES Exam_appeals(id)
+    FOREIGN KEY (exam_appeals_id) REFERENCES Exam_appeals(id)
 );
