@@ -22,9 +22,9 @@ A university wants to track information about its academic organization.
 
 In the ER diagram we can see all the relationships related to the tables.
 
-- Yellow background (**One To Many**)
-- Blue background (**One To One**)
-- Purple background (**Many To Many**)
+- 🟡 Yellow background (**One To Many**)
+- 🔵 Blue background (**One To One**)
+- 🟣 Purple background (**Many To Many**)
 
 ![ER-diagram](./img/ER-diagram.jpeg)
 
@@ -33,6 +33,6 @@ In the ER diagram we can see all the relationships related to the tables.
 ### Download
 
 If you want to download the project, the ER diagram .drawio will also be present. The sql code can be found in the sql folder, which will be divided into 3 files:
-- **DDL** (Data Definition Language), for creating the database
+- **DDL** (Data Definition Language), for creating the database.
 - **DML** (Data Manipulation Language), to populate the database tables.
 - **DQL** (Data Query Language), queries to extract specific information from multiple tables at the same time.
