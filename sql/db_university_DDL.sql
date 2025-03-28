@@ -23,15 +23,15 @@ CREATE TABLE Courses (
 );
 
 CREATE TABLE Course_in_degree_course (
-    course_id INT NOT NULL,
-    degree_course_id INT NOT NULL,
+    course_id INT NOT NULL PRIMARY KEY,
+    degree_course_id INT NOT NULL PRIMARY KEY,
     FOREIGN KEY (course_id) REFERENCES Courses(id) ON DELETE CASCADE,
     FOREIGN KEY (degree_course_id) REFERENCES Degree_courses(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Teachers_in_courses (
-    teacher_id INT NOT NULL,
-    course_id INT NOT NULL,
+    teacher_id INT NOT NULL PRIMARY KEY,
+    course_id INT NOT NULL PRIMARY KEY,
     FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE,
     FOREIGN KEY (course_id) REFERENCES Courses(id) ON DELETE CASCADE
 );
@@ -57,15 +57,15 @@ CREATE TABLE Students (
     degree_course_id INT NOT NULL,
     student_name VARCHAR(255) NOT NULL,
     student_surname VARCHAR(255) NOT NULL,
-    phone_number VARCHAR(12) NOT NULL,
-    email VARCHAR(50) NOT NULL,
+    phone_number VARCHAR(12) NOT NULL UNIQUE,
+    email VARCHAR(50) NOT NULL UNIQUE,
     birthday_date DATE NOT NULL,
     FOREIGN KEY (degree_course_id) REFERENCES Degree_courses(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Students_in_exams_appeals (
-    student_id INT NOT NULL,
-    exam_appeals_id INT NOT NULL,
+    student_id INT NOT NULL PRIMARY KEY,
+    exam_appeals_id INT NOT NULL PRIMARY KEY,
     FOREIGN KEY (student_id) REFERENCES Students(id) ON DELETE CASCADE,
     FOREIGN KEY (exam_appeals_id) REFERENCES Exam_appeals(id) ON DELETE CASCADE
 );
