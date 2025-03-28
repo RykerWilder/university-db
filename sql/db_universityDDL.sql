@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS university;
-CREATE DATABASE university;
-USE university;
+DROP DATABASE IF EXISTS db_university;
+CREATE DATABASE db_university;
+USE db_university;
 
 CREATE TABLE Departments (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -13,7 +13,7 @@ CREATE TABLE Degree_courses (
     department_id INT NOT NULL,
     degree_course_name VARCHAR(255) NOT NULL,
     degree_course_subject VARCHAR(255),
-    FOREIGN KEY (department_id) REFERENCES Departments(id)
+    FOREIGN KEY (department_id) REFERENCES Departments(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Courses (
@@ -30,8 +30,8 @@ CREATE TABLE Course_in_degree_course (
 );
 
 CREATE TABLE Teachers_in_courses (
-    teacher_id NOT NULL,
-    course_id NOT NULL,
+    teacher_id INT NOT NULL,
+    course_id INT NOT NULL,
     FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE,
     FOREIGN KEY (course_id) REFERENCES Courses(id) ON DELETE CASCADE
 );
@@ -42,14 +42,14 @@ CREATE TABLE Teachers (
     teacher_name VARCHAR(255) NOT NULL,
     teacher_surname VARCHAR(255) NOT NULL,
     specialization VARCHAR(255) NOT NULL
-    FOREIGN KEY (course_id) REFERENCES Courses(id)
+    FOREIGN KEY (course_id) REFERENCES Courses(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Exam_appeals (
     id INT AUTO_INCREMENT PRIMARY KEY,
     course_id INT NOT NULL,
     exam_appeal_date DATE NOT NULL,
-    FOREIGN KEY (course_id) REFERENCES Courses(id)
+    FOREIGN KEY (course_id) REFERENCES Courses(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Students (
@@ -60,7 +60,7 @@ CREATE TABLE Students (
     phone_number VARCHAR(12) NOT NULL,
     email VARCHAR(50) NOT NULL,
     birthday_date DATE NOT NULL,
-    FOREIGN KEY (degree_course_id) REFERENCES Degree_courses(id)
+    FOREIGN KEY (degree_course_id) REFERENCES Degree_courses(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Students_in_exams_appeals (
@@ -75,6 +75,6 @@ CREATE TABLE Students_record_book (
     student_id INT NOT NULL,
     exam_appeals_id INT NOT NULL,
     grade DECIMAL NOT NULL,
-    FOREIGN KEY (student_id) REFERENCES Students(id),
-    FOREIGN KEY (exam_appeals_id) REFERENCES Exam_appeals(id)
+    FOREIGN KEY (student_id) REFERENCES Students(id) ON DELETE CASCADE,
+    FOREIGN KEY (exam_appeals_id) REFERENCES Exam_appeals(id) ON DELETE CASCADE
 );
