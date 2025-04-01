@@ -22,26 +22,26 @@ CREATE TABLE Courses (
     cfu INT NOT NULL
 );
 
+CREATE TABLE Teachers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    teacher_name VARCHAR(255) NOT NULL,
+    teacher_surname VARCHAR(255) NOT NULL,
+    specialization VARCHAR(255) NOT NULL
+);
+
 CREATE TABLE Course_in_degree_course (
-    course_id INT NOT NULL PRIMARY KEY,
-    degree_course_id INT NOT NULL PRIMARY KEY,
+    course_id INT NOT NULL,
+    degree_course_id INT NOT NULL,
+    PRIMARY KEY (course_id, degree_course_id),
     FOREIGN KEY (course_id) REFERENCES Courses(id) ON DELETE CASCADE,
     FOREIGN KEY (degree_course_id) REFERENCES Degree_courses(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Teachers_in_courses (
-    teacher_id INT NOT NULL PRIMARY KEY,
-    course_id INT NOT NULL PRIMARY KEY,
-    FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE,
-    FOREIGN KEY (course_id) REFERENCES Courses(id) ON DELETE CASCADE
-);
-
-CREATE TABLE Teachers (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    teacher_id INT NOT NULL,
     course_id INT NOT NULL,
-    teacher_name VARCHAR(255) NOT NULL,
-    teacher_surname VARCHAR(255) NOT NULL,
-    specialization VARCHAR(255) NOT NULL
+    PRIMARY KEY (teacher_id, course_id),
+    FOREIGN KEY (teacher_id) REFERENCES Teachers(id) ON DELETE CASCADE,
     FOREIGN KEY (course_id) REFERENCES Courses(id) ON DELETE CASCADE
 );
 
@@ -64,8 +64,9 @@ CREATE TABLE Students (
 );
 
 CREATE TABLE Students_in_exams_appeals (
-    student_id INT NOT NULL PRIMARY KEY,
-    exam_appeals_id INT NOT NULL PRIMARY KEY,
+    student_id INT NOT NULL,
+    exam_appeals_id INT NOT NULL,
+    PRIMARY KEY (student_id, exam_appeals_id),
     FOREIGN KEY (student_id) REFERENCES Students(id) ON DELETE CASCADE,
     FOREIGN KEY (exam_appeals_id) REFERENCES Exam_appeals(id) ON DELETE CASCADE
 );
@@ -74,7 +75,7 @@ CREATE TABLE Students_record_book (
     id INT AUTO_INCREMENT PRIMARY KEY,
     student_id INT NOT NULL,
     exam_appeals_id INT NOT NULL,
-    grade DECIMAL NOT NULL,
+    grade DECIMAL(4,2) NOT NULL,  -- Esempio: 30.00 (max voto in Italia)
     FOREIGN KEY (student_id) REFERENCES Students(id) ON DELETE CASCADE,
     FOREIGN KEY (exam_appeals_id) REFERENCES Exam_appeals(id) ON DELETE CASCADE
 );
